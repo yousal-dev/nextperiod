@@ -1,0 +1,343 @@
+:root {
+    --brand: #5E17EB;
+    --brand-light: #7B3FF2;
+    --brand-dark: #3D0DB3;
+    --brand-glow: rgba(94, 23, 235, 0.45);
+    --accent: #C084FC;
+    --accent2: #E879F9;
+    --bg: #0A0612;
+    --bg2: #0F0A1E;
+    --surface: rgba(94, 23, 235, 0.08);
+    --surface-hover: rgba(94, 23, 235, 0.15);
+    --border: rgba(94, 23, 235, 0.25);
+    --text: #F3EEFF;
+    --text-muted: rgba(243, 238, 255, 0.55);
+    --green: #34D399;
+    --blue: #60A5FA;
+    --yellow: #FBBF24;
+    --red: #F87171;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(94, 23, 235, 0.35) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 85% 80%, rgba(192, 132, 252, 0.12) 0%, transparent 50%);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 32px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Syne', sans-serif;
+}
+
+/* Noise overlay */
+.noise {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px;
+}
+
+.container {
+    max-width: 860px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Header ── */
+header {
+    margin-bottom: 32px;
+    padding: 28px 32px 22px;
+    background: rgba(94, 23, 235, 0.07);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 40px rgba(94, 23, 235, 0.18), inset 0 1px 0 rgba(255,255,255,0.06);
+    animation: fadeSlideDown 0.6s ease both;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 8px;
+}
+
+.logo-img {
+    width: 44px;
+    height: 44px;
+    filter: drop-shadow(0 0 10px var(--brand-glow));
+}
+
+h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tagline {
+    font-size: 1rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+.dev-credit {
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: var(--accent);
+    opacity: 0.7;
+    font-family: 'Space Mono', monospace;
+}
+
+/* ── Day Selector ── */
+.day-selector {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    animation: fadeSlideDown 0.6s 0.1s ease both;
+}
+
+.day-btn {
+    padding: 10px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.25s;
+    font-size: 0.9rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.day-btn:hover {
+    background: var(--surface-hover);
+    color: var(--text);
+    border-color: rgba(94, 23, 235, 0.5);
+}
+
+.day-btn.active {
+    background: var(--brand);
+    border-color: var(--brand-light);
+    color: #fff;
+    box-shadow: 0 0 20px var(--brand-glow);
+}
+
+/* ── Current Info ── */
+.current-info {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin-bottom: 28px;
+    box-shadow: 0 0 50px rgba(94, 23, 235, 0.12), inset 0 1px 0 rgba(255,255,255,0.05);
+    animation: fadeSlideDown 0.6s 0.2s ease both;
+}
+
+.current-period {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 8px;
+}
+
+.timer {
+    font-size: 3.8rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    font-family: 'Space Mono', monospace;
+    background: linear-gradient(135deg, #fff 40%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 12px 0;
+    text-shadow: none;
+    filter: drop-shadow(0 0 18px rgba(192,132,252,0.3));
+}
+
+.progress-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 100px;
+    margin: 18px 0 14px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(to right, var(--brand), var(--accent), var(--accent2));
+    width: 0%;
+    transition: width 1s linear;
+    border-radius: 100px;
+    box-shadow: 0 0 10px rgba(192,132,252,0.5);
+}
+
+.status-text {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+}
+
+/* ── Table ── */
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(94, 23, 235, 0.1);
+    animation: fadeSlideDown 0.6s 0.3s ease both;
+}
+
+.schedule-table th,
+.schedule-table td {
+    padding: 14px 16px;
+    text-align: center;
+    border-bottom: 1px solid rgba(94, 23, 235, 0.12);
+}
+
+.schedule-table th {
+    background: rgba(94, 23, 235, 0.18);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+}
+
+.schedule-table tr:last-child td {
+    border-bottom: none;
+}
+
+.schedule-table tbody tr {
+    transition: background 0.2s;
+}
+
+.schedule-table tbody tr:hover {
+    background: rgba(94, 23, 235, 0.08);
+}
+
+.active-period {
+    background: rgba(94, 23, 235, 0.2) !important;
+    font-weight: bold;
+}
+
+.active-period td {
+    color: var(--accent) !important;
+}
+
+.active-period td:first-child::before {
+    content: '▶ ';
+    color: var(--brand-light);
+}
+
+.next-period {
+    background: rgba(96, 165, 250, 0.08) !important;
+}
+
+.next-period td {
+    color: var(--blue) !important;
+}
+
+.period-name {
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.88rem;
+}
+
+.period-time {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+}
+
+.lunch-note {
+    font-size: 0.72rem;
+    color: var(--yellow);
+    margin-top: 4px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* ── Footer ── */
+footer {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.footer-link {
+    color: var(--accent);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.footer-link:hover {
+    opacity: 1;
+}
+
+/* ── Animations ── */
+@keyframes fadeSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    h1 { font-size: 1.7rem; }
+    .timer { font-size: 2.6rem; letter-spacing: 2px; }
+
+    .schedule-table th,
+    .schedule-table td {
+        padding: 10px 8px;
+        font-size: 0.8rem;
+    }
+
+    .day-btn {
+        padding: 8px 18px;
+        font-size: 0.85rem;
+    }
+
+    .current-info {
+        padding: 20px 18px;
+    }
+}
